@@ -702,6 +702,8 @@ class Swift_Mime_SimpleMimeEntity implements Swift_Mime_MimeEntity
             $string .= $bytes;
         }
 
+        $os->setReadPointer(0);
+
         return $string;
     }
 
@@ -856,7 +858,6 @@ class Swift_Mime_SimpleMimeEntity implements Swift_Mime_MimeEntity
         $this->_headers = clone $this->_headers;
         $this->_encoder = clone $this->_encoder;
         $this->_cacheKey = uniqid();
-        $this->generateId();
         $children = array();
         foreach ($this->_children as $pos => $child) {
             $children[$pos] = clone $child;
