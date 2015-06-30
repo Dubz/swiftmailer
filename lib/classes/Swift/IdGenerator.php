@@ -9,16 +9,14 @@
  */
 
 /**
- * Interface for all Header Encoding schemes.
- *
- * @author Chris Corbyn
+ * Message ID generator.
  */
-interface Swift_Mime_HeaderEncoder extends Swift_Encoder
+interface Swift_IdGenerator
 {
     /**
-     * Get the MIME name of this content encoding scheme.
+     * Returns a globally unique string to use for Message-ID or Content-ID.
      *
      * @return string
      */
-    public function getName();
+    public function generateId();
 }

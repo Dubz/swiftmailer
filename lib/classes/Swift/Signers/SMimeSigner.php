@@ -12,8 +12,8 @@
  * MIME Message Signer used to apply S/MIME Signature/Encryption to a message.
  *
  *
- * @author     Romain-Geissler
- * @author     Sebastiaan Stok <s.stok@rollerscapes.net>
+ * @author Romain-Geissler
+ * @author Sebastiaan Stok <s.stok@rollerscapes.net>
  */
 class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
 {
@@ -59,26 +59,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
             ->lookup('transport.replacementfactory');
 
         $this->signOptions = PKCS7_DETACHED;
-
-        // Supported since php5.4
-        if (defined('OPENSSL_CIPHER_AES_128_CBC')) {
-            $this->encryptCipher = OPENSSL_CIPHER_AES_128_CBC;
-        } else {
-            $this->encryptCipher = OPENSSL_CIPHER_RC2_128;
-        }
-    }
-
-    /**
-     * Returns an new Swift_Signers_SMimeSigner instance.
-     *
-     * @param string $certificate
-     * @param string $privateKey
-     *
-     * @return Swift_Signers_SMimeSigner
-     */
-    public static function newInstance($certificate = null, $privateKey = null)
-    {
-        return new self($certificate, $privateKey);
+        $this->encryptCipher = OPENSSL_CIPHER_AES_128_CBC;
     }
 
     /**
@@ -89,7 +70,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
      * @param string       $certificate
      * @param string|array $privateKey  If the key needs an passphrase use array('file-location', 'passphrase') instead
      * @param int          $signOptions Bitwise operator options for openssl_pkcs7_sign()
-     * @param string       $extraCerts A file containing intermediate certificates needed by the signing certificate
+     * @param string       $extraCerts  A file containing intermediate certificates needed by the signing certificate
      *
      * @return Swift_Signers_SMimeSigner
      */
@@ -234,7 +215,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
 
     /**
      * @param Swift_InputByteStream $inputStream
-     * @param Swift_Message   $mimeEntity
+     * @param Swift_Message         $mimeEntity
      */
     protected function toSMimeByteStream(Swift_InputByteStream $inputStream, Swift_Message $message)
     {
